@@ -10,7 +10,7 @@ import org.koin.core.context.unloadKoinModules
 class FavoriteActivity : AppCompatActivity() {
 
     private var _activityFavoriteBinding: ActivityFavoriteBinding? = null
-    val activityFavoriteBinding get() = _activityFavoriteBinding!!
+    private val activityFavoriteBinding get() = _activityFavoriteBinding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

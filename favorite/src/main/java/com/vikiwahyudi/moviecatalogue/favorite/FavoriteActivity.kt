@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.vikiwahyudi.moviecatalogue.databinding.ActivityFavoriteBinding
 import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
 
 
 class FavoriteActivity : AppCompatActivity() {
@@ -16,7 +17,7 @@ class FavoriteActivity : AppCompatActivity() {
         _activityFavoriteBinding = ActivityFavoriteBinding.inflate(layoutInflater)
         setContentView(activityFavoriteBinding.root)
         loadKoinModules(viewModelModule)
-        supportActionBar?.title = "Favorite"
+        supportActionBar?.title = getString(R.string.favorite)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val sectionsPagerAdapter = FavoriteSectionsPagerAdapter(this, supportFragmentManager)
         activityFavoriteBinding.favViewPager.adapter = sectionsPagerAdapter
@@ -31,6 +32,7 @@ class FavoriteActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        unloadKoinModules(viewModelModule)
         _activityFavoriteBinding = null
     }
 }

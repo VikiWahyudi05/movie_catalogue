@@ -3,11 +3,13 @@ package com.vikiwahyudi.moviecatalogue.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.vikiwahyudi.moviecatalogue.R
 import com.vikiwahyudi.core.domain.model.Movie
+import com.vikiwahyudi.core.utils.FavoriteDiffCallback
 import com.vikiwahyudi.core.utils.NetworkInfo.IMAGE_URL
 import com.vikiwahyudi.moviecatalogue.databinding.ItemsMovieBinding
 
@@ -18,8 +20,11 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ListViewHolder>() {
 
     fun setData(newListData: List<Movie>?) {
         if (newListData == null) return
+        val diffCallback = FavoriteDiffCallback(this.listData, newListData)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
         this.listData.clear()
         this.listData.addAll(newListData)
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieAdapter.ListViewHolder =

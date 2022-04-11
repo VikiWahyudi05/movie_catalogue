@@ -17,7 +17,7 @@ class FavoriteActivity : AppCompatActivity() {
         _activityFavoriteBinding = ActivityFavoriteBinding.inflate(layoutInflater)
         setContentView(activityFavoriteBinding.root)
         loadKoinModules(viewModelModule)
-        supportActionBar?.title = getString(R.string.title_favorite)
+        supportActionBar?.title = "Favorite"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val sectionsPagerAdapter = FavoriteSectionsPagerAdapter(this, supportFragmentManager)
         activityFavoriteBinding.favViewPager.adapter = sectionsPagerAdapter

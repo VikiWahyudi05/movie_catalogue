@@ -5,11 +5,11 @@
     package="com.vikiwahyudi.moviecatalogue.favorite">
 
 
-    <application tools:ignore="MissingApplicationIcon">
-        <activity
-            android:name=".FavoriteActivity"
-            android:exported="false" />
-    </application>
+<!--    <application tools:ignore="MissingApplicationIcon">-->
+<!--        <activity-->
+<!--            android:name=".FavoriteActivity"-->
+<!--            android:exported="false" />-->
+<!--    </application>-->
 
     <dist:module
         dist:instant="false"

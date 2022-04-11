@@ -1,15 +1,17 @@
 package com.vikiwahyudi.core.utils
 
+import com.vikiwahyudi.core.data.source.local.entity.MovieEntity
+import com.vikiwahyudi.core.data.source.local.entity.TvShowEntity
 import com.vikiwahyudi.core.data.source.remote.response.movie.MovieResponse
 import com.vikiwahyudi.core.data.source.remote.response.tvshow.TvShowResponse
 import com.vikiwahyudi.core.domain.model.Movie
 import com.vikiwahyudi.core.domain.model.TvShow
 
 object DataMapper {
-    fun mapMovieResponsesToEntities(input: List<MovieResponse>): List<com.vikiwahyudi.core.data.source.local.entity.MovieEntity> {
-        val movieList = ArrayList<com.vikiwahyudi.core.data.source.local.entity.MovieEntity>()
+    fun mapMovieResponsesToEntities(input: List<MovieResponse>): List<MovieEntity> {
+        val movieList = ArrayList<MovieEntity>()
         input.map {
-            val movie = com.vikiwahyudi.core.data.source.local.entity.MovieEntity(
+            val movie = MovieEntity(
                 id = it.id,
                 title = it.title,
                 releaseDate = it.releaseDate,
@@ -24,10 +26,10 @@ object DataMapper {
         return movieList
     }
 
-    fun mapTvShowResponsesToEntities(input: List<TvShowResponse>): List<com.vikiwahyudi.core.data.source.local.entity.TvShowEntity> {
-        val tvShowList = ArrayList<com.vikiwahyudi.core.data.source.local.entity.TvShowEntity>()
+    fun mapTvShowResponsesToEntities(input: List<TvShowResponse>): List<TvShowEntity> {
+        val tvShowList = ArrayList<TvShowEntity>()
         input.map {
-            val tvShow = com.vikiwahyudi.core.data.source.local.entity.TvShowEntity(
+            val tvShow = TvShowEntity(
                 id = it.id,
                 name = it.name,
                 firstAirDate = it.firstAirDate,
@@ -42,7 +44,7 @@ object DataMapper {
         return tvShowList
     }
 
-    fun mapMovieEntitiesToDomain(input: List<com.vikiwahyudi.core.data.source.local.entity.MovieEntity>): List<Movie> =
+    fun mapMovieEntitiesToDomain(input: List<MovieEntity>): List<Movie> =
         input.map {
             Movie(
                 id = it.id,
@@ -56,7 +58,7 @@ object DataMapper {
             )
         }
 
-    fun mapTvShowEntitiesToDomain(input: List<com.vikiwahyudi.core.data.source.local.entity.TvShowEntity>): List<TvShow> =
+    fun mapTvShowEntitiesToDomain(input: List<TvShowEntity>): List<TvShow> =
         input.map {
             TvShow(
                 id = it.id,
@@ -71,7 +73,7 @@ object DataMapper {
         }
 
     fun mapMovieDomainToEntity(input: Movie) =
-        com.vikiwahyudi.core.data.source.local.entity.MovieEntity(
+        MovieEntity(
             id = input.id,
             title = input.title,
             releaseDate = input.releaseDate,
@@ -83,7 +85,7 @@ object DataMapper {
         )
 
     fun mapTvShowDomainToEntity(input: TvShow) =
-        com.vikiwahyudi.core.data.source.local.entity.TvShowEntity(
+        TvShowEntity(
             id = input.id,
             name = input.name,
             firstAirDate = input.firstAirDate,
@@ -94,7 +96,7 @@ object DataMapper {
             isFav = input.isFav
         )
 
-    fun mapMovieEntityToDomain(input: com.vikiwahyudi.core.data.source.local.entity.MovieEntity) =
+    fun mapMovieEntityToDomain(input: MovieEntity) =
         Movie(
             id = input.id,
             title = input.title,
@@ -106,7 +108,7 @@ object DataMapper {
             isFav = input.isFav
         )
 
-    fun mapTvShowEntityToDomain(input: com.vikiwahyudi.core.data.source.local.entity.TvShowEntity) =
+    fun mapTvShowEntityToDomain(input: TvShowEntity) =
         TvShow(
             id = input.id,
             name = input.name,

@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -71,14 +72,13 @@ class MovieDetailActivity : AppCompatActivity() {
     private fun setStatusFavorite(statusFavorite: Boolean) {
         with(activityMovieDetailBinding.detailContent) {
             if (statusFavorite) {
-                val favIcon: Drawable =
-                    btnFavMovie.getContext().getResources()
-                        .getDrawable(R.drawable.ic_delete_forever_24)
+                val favIcon: Drawable? =
+                    ResourcesCompat.getDrawable(resources, R.drawable.ic_delete_forever_24, theme)
                 btnFavMovie.setCompoundDrawablesWithIntrinsicBounds(favIcon, null, null, null)
                 btnFavMovie.text = getString(R.string.delete_favorite)
             } else {
-                val favIcon: Drawable =
-                    btnFavMovie.getContext().getResources().getDrawable(R.drawable.ic_favorite_24)
+                val favIcon: Drawable? =
+                    ResourcesCompat.getDrawable(resources, R.drawable.ic_favorite_24, theme)
                 btnFavMovie.setCompoundDrawablesWithIntrinsicBounds(favIcon, null, null, null)
                 btnFavMovie.text = getString(R.string.add_favorite)
             }

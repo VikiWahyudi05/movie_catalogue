@@ -14,7 +14,7 @@ class MovieRepository(
     private val localDataSource: com.vikiwahyudi.core.data.source.local.LocalDataSource,
     private val appExecutors: AppExecutors
 ) : IMovieRepository {
-    override fun getAllMovie(): Flow<com.vikiwahyudi.core.data.Resource<List<Movie>>> =
+    override fun getAllMovie(): Flow<Resource<List<Movie>>> =
         object :
             com.vikiwahyudi.core.data.NetworkBoundResource<List<Movie>, List<MovieResponse>>() {
             override fun loadFromDB(): Flow<List<Movie>> {

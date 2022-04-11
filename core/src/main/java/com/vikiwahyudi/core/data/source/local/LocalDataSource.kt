@@ -1,5 +1,7 @@
 package com.vikiwahyudi.core.data.source.local
 
+import com.vikiwahyudi.core.data.source.local.entity.MovieEntity
+import com.vikiwahyudi.core.data.source.local.entity.TvShowEntity
 import kotlinx.coroutines.flow.Flow
 
 class LocalDataSource(private val movieDBAppDao: com.vikiwahyudi.core.data.source.local.room.MovieDBAppDao) {
@@ -28,18 +30,12 @@ class LocalDataSource(private val movieDBAppDao: com.vikiwahyudi.core.data.sourc
     fun getDetailTvShow(id: Int): Flow<com.vikiwahyudi.core.data.source.local.entity.TvShowEntity> =
         movieDBAppDao.getDetailTvShow(id)
 
-    fun updateFavoriteMovie(
-        movie: com.vikiwahyudi.core.data.source.local.entity.MovieEntity,
-        newState: Boolean
-    ) {
+    fun updateFavoriteMovie(movie: MovieEntity, newState: Boolean) {
         movie.isFav = newState
         movieDBAppDao.updateFavoriteMovie(movie)
     }
 
-    fun updateFavoriteTvShow(
-        tvShow: com.vikiwahyudi.core.data.source.local.entity.TvShowEntity,
-        newState: Boolean
-    ) {
+    fun updateFavoriteTvShow(tvShow: TvShowEntity, newState: Boolean) {
         tvShow.isFav = newState
         movieDBAppDao.updateFavoriteTvShow(tvShow)
     }

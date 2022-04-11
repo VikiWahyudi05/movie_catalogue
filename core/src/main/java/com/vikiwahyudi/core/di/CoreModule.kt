@@ -1,7 +1,9 @@
 package com.vikiwahyudi.core.di
 
 import androidx.room.Room
+import com.vikiwahyudi.core.data.source.local.LocalDataSource
 import com.vikiwahyudi.core.data.source.local.room.MovieAppDatabase
+import com.vikiwahyudi.core.data.source.remote.RemoteDataSource
 import com.vikiwahyudi.core.data.source.remote.network.ApiService
 import com.vikiwahyudi.core.domain.repository.IMovieRepository
 import com.vikiwahyudi.core.domain.repository.ITvShowRepository
@@ -58,8 +60,8 @@ val networkModule = module {
 }
 
 val repositoryModule = module {
-    single { com.vikiwahyudi.core.data.source.local.LocalDataSource(get()) }
-    single { com.vikiwahyudi.core.data.source.remote.RemoteDataSource(get()) }
+    single { LocalDataSource(get()) }
+    single { RemoteDataSource(get()) }
     factory { AppExecutors() }
     single<IMovieRepository> {
         com.vikiwahyudi.core.data.MovieRepository(

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.vikiwahyudi.core.data.Resource
 import com.vikiwahyudi.moviecatalogue.ui.TvShowAdapter
 import com.vikiwahyudi.moviecatalogue.R
 import com.vikiwahyudi.moviecatalogue.databinding.FragmentTvShowBinding
@@ -20,7 +21,11 @@ class TvShowFragment : Fragment() {
     private var _fragmentTvShowBinding: FragmentTvShowBinding? = null
     val fragmentTvShowBinding get() = _fragmentTvShowBinding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _fragmentTvShowBinding = FragmentTvShowBinding.inflate(layoutInflater, container, false)
         return fragmentTvShowBinding.root
     }
@@ -28,7 +33,7 @@ class TvShowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (activity != null) {
             val tvShowAdapter = TvShowAdapter()
-            tvShowAdapter.onItemClick = {selectedData ->
+            tvShowAdapter.onItemClick = { selectedData ->
                 val moveIntent = Intent(requireActivity(), TvShowDetailActivity::class.java)
                 moveIntent.putExtra(TvShowDetailActivity.EXTRA_TV_SHOW_ID, selectedData.id)
                 startActivity(moveIntent)
@@ -37,13 +42,12 @@ class TvShowFragment : Fragment() {
             tvShowViewModel.tvShows.observe(viewLifecycleOwner) { tvShows ->
                 if (tvShows != null) {
                     when (tvShows) {
-                        is com.vikiwahyudi.core.data.Resource.Loading -> showProgressBar(true)
-                        is com.vikiwahyudi.core.data.Resource.Success -> {
+                        is Resource.Loading -> showProgressBar(true)
+                        is Resource.Success -> {
                             showProgressBar(false)
                             tvShowAdapter.setData(tvShows.data)
-                            tvShowAdapter.notifyDataSetChanged()
                         }
-                        is com.vikiwahyudi.core.data.Resource.Error -> {
+                        is Resource.Error -> {
                             showProgressBar(false)
                             fragmentTvShowBinding.viewError.root.visibility = View.VISIBLE
                             fragmentTvShowBinding.viewError.tvError.text =
@@ -53,7 +57,7 @@ class TvShowFragment : Fragment() {
                 }
             }
 
-            with(fragmentTvShowBinding.rvTvShow){
+            with(fragmentTvShowBinding.rvTvShow) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
                 adapter = tvShowAdapter

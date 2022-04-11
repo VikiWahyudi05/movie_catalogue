@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.vikiwahyudi.core.data.Resource
 import com.vikiwahyudi.moviecatalogue.ui.MovieAdapter
 import com.vikiwahyudi.moviecatalogue.R
 import com.vikiwahyudi.moviecatalogue.databinding.FragmentMovieBinding
@@ -41,13 +42,12 @@ class MovieFragment : Fragment() {
             movieViewModel.movies.observe(viewLifecycleOwner) { movies ->
                 if (movies != null) {
                     when (movies) {
-                        is com.vikiwahyudi.core.data.Resource.Loading -> showProgressBar(true)
-                        is com.vikiwahyudi.core.data.Resource.Success -> {
+                        is Resource.Loading -> showProgressBar(true)
+                        is Resource.Success -> {
                             showProgressBar(false)
                             movieAdapter.setData(movies.data)
-                            movieAdapter.notifyDataSetChanged()
                         }
-                        is com.vikiwahyudi.core.data.Resource.Error -> {
+                        is Resource.Error -> {
                             showProgressBar(false)
                             fragmentMovieBinding.viewError.root.visibility = View.VISIBLE
                             fragmentMovieBinding.viewError.tvError.text =

@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -69,14 +70,13 @@ class TvShowDetailActivity : AppCompatActivity() {
     private fun setStatusFavorite(statusFavorite: Boolean) {
         with(activityTvShowDetailBinding.detailContent) {
             if (statusFavorite) {
-                val favIcon: Drawable =
-                    btnFavTvShow.getContext().getResources()
-                        .getDrawable(R.drawable.ic_delete_forever_24)
+                val favIcon: Drawable? =
+                    ResourcesCompat.getDrawable(resources, R.drawable.ic_delete_forever_24, theme)
                 btnFavTvShow.setCompoundDrawablesWithIntrinsicBounds(favIcon, null, null, null)
                 btnFavTvShow.text = getString(R.string.delete_favorite)
             } else {
-                val favIcon: Drawable =
-                    btnFavTvShow.getContext().getResources().getDrawable(R.drawable.ic_favorite_24)
+                val favIcon: Drawable? =
+                    ResourcesCompat.getDrawable(resources, R.drawable.ic_favorite_24, theme)
                 btnFavTvShow.setCompoundDrawablesWithIntrinsicBounds(favIcon, null, null, null)
                 btnFavTvShow.text = getString(R.string.add_favorite)
             }

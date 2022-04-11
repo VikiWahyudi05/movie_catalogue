@@ -10,8 +10,9 @@ import com.vikiwahyudi.moviecatalogue.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+
     private var _activityMainBinding: ActivityMainBinding? = null
-    val activityMainBinding get() = _activityMainBinding!!
+    private val activityMainBinding get() = _activityMainBinding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
